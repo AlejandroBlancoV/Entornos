@@ -1,6 +1,9 @@
 package com.cebem.rickandmorty.controllers;
 
+import java.io.IOException;
+import java.lang.ProcessHandle.Info;
 import java.text.MessageFormat;
+import java.util.Map;
 
 import org.apache.logging.log4j.message.Message;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,8 +39,21 @@ public class rickController {
     }
 
     @PostMapping("/saveOnDisk")
-    public String saveOnDisk() {
+    public String saveOnDisk(@RequestParam Map<String, String> body) {
+        String name= body.get("name");
+        String price= body.get("price");
 
+
+        String info= name+" - "+ price+" \n";
+
+        try {
+            Utils.writeOnDisk("datos.txt", info);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            return "Error al intentar escribir en el fichero";
+        }        
+
+        return "Gracias por enviar el formulario, los datos se han guardado en el servidor";
     }
 
 }
