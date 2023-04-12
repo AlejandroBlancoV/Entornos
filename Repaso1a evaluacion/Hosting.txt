@@ -1,0 +1,9 @@
+dominio:gaalpos.epizy.com
+user: username epiz_32925549
+password: tgLxRlVsrgM3rN
+port:21
+BD:
+nombre:epiz_32925549_teachers
+User:epiz_32925549
+Passord:tgLxRlVsrgM3rN
+Host:sql111.epizy.com
