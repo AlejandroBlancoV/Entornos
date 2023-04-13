@@ -1,5 +1,6 @@
 package com.cebem.rickandmorty.utils;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -11,15 +12,21 @@ public class Utils {
 
     }
 
-    public static void writeOnDisk(String fileName,String info) throws IOException{
+    public static void writeOnDisk(String fileName, String info) throws IOException {
         FileWriter fw = null;
         try {
             fw = new FileWriter(fileName, true);
             fw.write(info);
-        }  finally{
-            if(fw!=null) fw.close();
+        } finally {
+            if (fw != null)
+                fw.close();
 
         }
 
+    }
+
+    public static boolean deleteFromDisk(String fileName) {
+        File f = new File("datos.txt");
+        return f.delete();
     }
 }

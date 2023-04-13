@@ -1,11 +1,13 @@
 package com.cebem.rickandmorty.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.ProcessHandle.Info;
 import java.text.MessageFormat;
 import java.util.Map;
 
 import org.apache.logging.log4j.message.Message;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cebem.rickandmorty.utils.Utils;
+
+import ch.qos.logback.classic.pattern.Util;
 
 @RestController
 public class rickController {
@@ -40,20 +44,24 @@ public class rickController {
 
     @PostMapping("/saveOnDisk")
     public String saveOnDisk(@RequestParam Map<String, String> body) {
-        String name= body.get("name");
-        String price= body.get("price");
+        String name = body.get("name");
+        String price = body.get("price");
 
-
-        String info= name+" - "+ price+" \n";
+        String info = name + " - " + price + " \n";
 
         try {
             Utils.writeOnDisk("datos.txt", info);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             return "Error al intentar escribir en el fichero";
-        }        
+        }
 
         return "Gracias por enviar el formulario, los datos se han guardado en el servidor";
     }
 
+    @DeleteMapping("/removeFromDisk")
+    public String removeFromDisk() {
+        boolean resultado = Utils.deleteFromDisk("datos.txt");
+        return resultado ? "Borrado correctamente" : " No he podido eliminar el archivo";
+    }
 }
