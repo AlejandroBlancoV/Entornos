@@ -7,6 +7,7 @@ import java.text.MessageFormat;
 import java.util.Map;
 
 import org.apache.logging.log4j.message.Message;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,7 +59,7 @@ public class rickController {
 
         return "Gracias por enviar el formulario, los datos se han guardado en el servidor";
     }
-
+@CrossOrigin(origins = "*")
     @DeleteMapping("/removeFromDisk")
     public String removeFromDisk() {
         boolean resultado = Utils.deleteFromDisk("datos.txt");
