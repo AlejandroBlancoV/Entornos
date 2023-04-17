@@ -1,8 +1,11 @@
 package com.cebem.rickandmorty.utils;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Utils {
     public static boolean isPalindrome(String word) {
@@ -28,5 +31,28 @@ public class Utils {
     public static boolean deleteFromDisk(String fileName) {
         File f = new File("datos.txt");
         return f.delete();
+    }
+
+    public static String readFromDisk(String fileName) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(fileName)); 
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line); 
+            }
+        } finally {
+            if (br != null) {
+                br.close(); 
+            }
+        }
+        return sb.toString();
+    }
+
+    public static void emptyFile(String File) throws IOException {
+        PrintWriter w = new PrintWriter(new FileWriter(File));
+        w.print("");
+        w.close();
     }
 }
