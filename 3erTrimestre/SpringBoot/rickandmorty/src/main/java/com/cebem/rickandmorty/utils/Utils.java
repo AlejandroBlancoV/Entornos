@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Random;
 
 public class Utils {
     public static boolean isPalindrome(String word) {
@@ -54,5 +55,10 @@ public class Utils {
         PrintWriter w = new PrintWriter(new FileWriter(File));
         w.print("");
         w.close();
+    }
+
+    public static int getRandomValue(int maxValue) {
+        Random random = new Random();
+        return random.nextInt(maxValue + 1);
     }
 }

@@ -164,4 +164,9 @@ public class rickController {
         }
         return false;
     }
+
+    @GetMapping("/rickandmorty/random")
+    public static String randomCharacter(){
+        return "";
+    }
 }
