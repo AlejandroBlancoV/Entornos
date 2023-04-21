@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Random;
 
 import org.apache.logging.log4j.message.Message;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cebem.rickandmorty.Services.RickAndMortyService;
+import com.cebem.rickandmorty.models.CharacterModel;
 import com.cebem.rickandmorty.utils.Utils;
 
 import ch.qos.logback.classic.pattern.Util;
 
 @RestController
 public class rickController {
+
     @GetMapping("/")
     public String saluda() {
         return "Bienvenid@ a mi api rest de rickAndMorty";
@@ -61,13 +65,13 @@ public class rickController {
 
         return "Gracias por enviar el formulario, los datos se han guardado en el servidor";
     }
-@CrossOrigin(origins = "*")
+
+    @CrossOrigin(origins = "*")
     @DeleteMapping("/removeFromDisk")
     public String removeFromDisk() {
         boolean resultado = Utils.deleteFromDisk("datos.txt");
         return resultado ? "Borrado correctamente" : " No he podido eliminar el archivo";
     }
-
 
     @GetMapping("/mayor")
     public String mayor(@RequestParam String num1, @RequestParam String num2, @RequestParam String num3) {
@@ -165,8 +169,18 @@ public class rickController {
         return false;
     }
 
+    @Autowired
+    RickAndMortyService rickAndMortyService;
+
     @GetMapping("/rickandmorty/random")
-    public static String randomCharacter(){
-        return "";
+    public String randomCharacter() {
+        // RickAndMortyService service = new RickAndMortyService();
+
+        CharacterModel charactermodel = rickAndMortyService.getCharacterRandom();
+        return charactermodel.name + "<br/>" + "<img src='" + charactermodel.image + "'/>";
     }
+
+
+    @GetMapping("/rickandmorty/all")
+    public String 
 }
