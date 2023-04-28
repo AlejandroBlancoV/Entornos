@@ -1,4 +1,4 @@
-spring.datasource.url=jdbc:postgresql://containers-us-west-202.railway.app:7864/railway
+spring.datasource.url=postgresql://postgres:q7jS07albGSPXh3Usy1x@containers-us-west-202.railway.app:7864/railway
 spring.datasource.username=postgres
 spring.datasource.password=q7jS07albGSPXh3Usy1x
 spring.datasource.driver-class-name=org.postgresql.Driver

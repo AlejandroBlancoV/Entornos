@@ -1,31 +1,114 @@
 import java.awt.Color;
+
 abstract class Raquet{
-  protected float x;
-  protected float y= height/2;
-  protected int w= 10;
-  protected int h= 100;
-  private float vy=0;
-  private Color c = Color.white;
+  protected float x=0;
+  protected float y=height/2;
+  protected int w=10;
+  protected int h=100;
+  private float vy = 0;
+  //private Color c=Color.WHITE;
   protected final static int WALL_SEPARATION=50;
-  public int points = 0;
+  public int points=0;
   
   public Raquet(){}
-  public void draw(){}
-  public void updatePosition(){}
-  public void limitOutScreen(){}
-  public void moveUp(){}
-  public void moveDown(){}
-  public void stop(){}
+  public void draw(){
+     rect(x,y, w,h);
   }
+  public void updatePosition(){
+    y += vy;
+  }
+  public void limitOutScreen(){
+    if(y<0) y=0;
+    if(y+h > height) y=height -h;
+    
+    
+  }
+  public void moveUp(){
+    vy=-10;
+  }
+  public void moveDown() {
+    vy=+10;
+  }
+  public void stop(){
+    vy=0;
+  }
+}
+
+class RaquetL extends Raquet{
+  public RaquetL(){
+    x=0+WALL_SEPARATION;
+    //y=height/2
+  }
+}
+class RaquetR extends Raquet{
+  public RaquetR(){
+    x=width - w  - WALL_SEPARATION;
+    //y=height/2
+  }
+}
+
+class Ball{
+  private float x = width/2;
+  private float y = height/2;
+  private int w = 20; // Lado
+  private float vx = 3;
+  private float vy = 3;
+  //private Color c = Color.WHITE;
+  public void Ball(){  }
+  public void draw() {}
+  public void updatePosition() {}
+  private boolean hasCollionLeftWall() { return false; }
+  private boolean hasCollionRightWall() { return false; }
+  private boolean hasCollionTopWall() { return false; }
+  private boolean hasCollionDownWall() { return false; }
+  public void controlCollisionTopBottomWall() { }
+  public boolean controlCollisionLeftWall() {return false;}
+  public boolean controlCollisionRightWall() {return false;}
   
-  class RaquetI extends Raquet{
-  public RaquetI(){
-  x=0+WALL_SEPARATION;
-  }
-  }
+  public void controlCollisionLeftRaquet() {}
+  public void controlCollisionRightRaquet() {}
+}
+
+
+
+Ball ball;
+RaquetL raquetL;
+RaquetR raquetR;
+
+public void setup() {
+  size(640,480);
+  fill(255,255,255);
+  stroke(255,255,255);
   
-   class RaquetD extends Raquet{
-  public RaquetD(){
-  x=
-  }
-  }
+  raquetL = new RaquetL();
+  raquetR = new RaquetR();
+  
+}
+
+public void draw(){
+  background(0);
+  raquetL.draw();
+  raquetR.draw();
+  raquetL.updatePosition();
+  raquetR.updatePosition();
+  
+  raquetL.limitOutScreen();
+  raquetR.limitOutScreen();
+}
+
+public void keyPressed(){
+  if(key == 'w') raquetL.moveUp();
+  if(key == 's') raquetL.moveDown();
+  
+  if(keyCode == UP) raquetR.moveUp();
+  if(keyCode == DOWN) raquetR.moveDown();
+  
+  System.out.println(keyCode);
+}
+public void keyReleased(){
+  if(key == 'w' || key == 's') raquetL.stop();
+   if(keyCode == UP || keyCode == DOWN) raquetR.stop();
+  
+}
+public void reset(){
+}
