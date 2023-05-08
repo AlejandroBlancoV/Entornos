@@ -1,4 +1,4 @@
-package com.cebem.rickandmorty.Services;
+package com.cebem.rickandmorty.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +22,12 @@ public class RickAndMortyService {
         return datos;
     }
 
-   /*  public CharactersModel getAllCharacters() {
-        String url = "https://rickandmortyapi.com/api/character/";
-        CharactersModel datos = restTemplate.getForObject(url, CharactersModel.class);
-        return datos;
-    }*/
+    /*
+     * public CharactersModel getAllCharacters() {
+     * String url = "https://rickandmortyapi.com/api/character/";
+     * CharactersModel datos = restTemplate.getForObject(url,
+     * CharactersModel.class);
+     * return datos;
+     * }
+     */
 }

@@ -54,6 +54,14 @@ class Ball{
   //private Color c = Color.WHITE;
   public Ball(){  
     reset();
+    float M=0;
+    float N=360;
+   // vx= (float)(Math.random()*(N-M+1)+M);
+   //vy= (float)(Math.random()*(N-M+1)+M);
+   float anguloGrados=(float)(Math.random()*(N-M+1)+M);
+   double anguloRadianes= (45*Math.PI) /180;
+   vx=(float)Math.cos(anguloRadianes)*1;
+   vx=(float)Math.sin(anguloRadianes)*1;
   }
   public void draw() {
     square(x,y, w);

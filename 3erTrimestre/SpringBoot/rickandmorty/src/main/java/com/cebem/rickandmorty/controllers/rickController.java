@@ -2,7 +2,7 @@ package com.cebem.rickandmorty.controllers;
 
 import com.cebem.rickandmorty.models.CharacterModel;
 import com.cebem.rickandmorty.models.CharactersModel;
-import com.cebem.rickandmorty.Services.RickAndMortyService2;
+import com.cebem.rickandmorty.services.RickAndMortyService2;
 import com.cebem.rickandmorty.utils.Utils;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -40,23 +40,24 @@ public class rickController {
     return Math.round(Math.random() * 10) + "";
   }
 
-  // ./mvnw spring-boot:run
+  //        ./mvnw spring-boot:run
   // http://localhost:8080/palindrome/ana
   @GetMapping("/palindrome/{word}")
   public String palindrome(@PathVariable String word) {
     return Utils.isPalindrome(word)
-        ? "Si es un palíndromo"
-        : "No es un palíndromo";
+      ? "Si es un palíndromo"
+      : "No es un palíndromo";
   }
 
-  // http://localhost:8080/add?n1=2&n2=4
+  //http://localhost:8080/add?n1=2&n2=4
   @GetMapping("/add")
   public String add(@RequestParam String n1, @RequestParam String n2) {
     float resultado = Float.parseFloat(n1) + Float.parseFloat(n2);
     Object params[] = { n1, n2, resultado };
     return MessageFormat.format(
-        "La suma de {0} mas {1} es igual a {2}",
-        params);
+      "La suma de {0} mas {1} es igual a {2}",
+      params
+    );
   }
 
   @PostMapping("/saveOnDisk")
@@ -82,13 +83,13 @@ public class rickController {
   }
 
   /*
-   * - Se pide que crees un endpoint en tu
-   * servidor que, pasandole un número cualquiera
-   * te devuelva ese número elevado al cuadrado
-   */
+- Se pide que crees un endpoint en tu
+servidor que, pasandole un número cualquiera
+te devuelva ese número elevado al cuadrado
+ */
 
-  // GET http://localhost:8080/cuadrado/5
-  // GET http://localhost:8080/cuadrado?numerito=5
+  // GET   http://localhost:8080/cuadrado/5
+  // GET   http://localhost:8080/cuadrado?numerito=5
   @GetMapping("/cuadrado")
   public String cuadradito(@RequestParam String numerito) {
     try {
@@ -100,10 +101,10 @@ public class rickController {
   }
 
   /*
-   * - Se pide que crees un endpoint que al
-   * llamarlo: vacie (no borre) el fichero datos.txt
-   * Prueba el funcionamiento de este endpoint
-   * con la extensión ThunderClient de vsc
+   - Se pide que crees un endpoint que al 
+llamarlo: vacie (no borre) el fichero datos.txt
+Prueba el funcionamiento de este endpoint 
+con la extensión ThunderClient de vsc
    */
   @DeleteMapping("/clear")
   public String clear() {
@@ -116,12 +117,12 @@ public class rickController {
   }
 
   /*
-   * Crea un endpoint que te devuelva toda la
-   * información guardada en el fichero datos.txt
-   * 
-   * GET http://localhost:8080/products
-   * 
-   */
+  Crea un endpoint que te devuelva toda la 
+información guardada en el fichero datos.txt
+
+GET   http://localhost:8080/products
+
+  */
   @GetMapping("/products")
   public static String getProducts() {
     try {
@@ -134,20 +135,21 @@ public class rickController {
   }
 
   /*
-   * 
-   * 
-   * /**
-   * Crea un endpoint al que le pases 3 números y devuelva el mayor de ellos.
-   * Si alguno de los elementos pasados no es un número devolver la frase "ERROR"
-   * 
-   * GET http://localhost:8080/max?n1=4&n2=3&n3=8
-   * 
+
+
+  /**
+   Crea un endpoint al que le pases 3 números y devuelva el mayor de ellos.
+    Si alguno de los elementos pasados no es un número devolver la frase "ERROR"
+
+    GET http://localhost:8080/max?n1=4&n2=3&n3=8
+
    */
   @GetMapping("/max")
   public static String max(
-      @RequestParam String n1,
-      @RequestParam String n2,
-      @RequestParam String n3) {
+    @RequestParam String n1,
+    @RequestParam String n2,
+    @RequestParam String n3
+  ) {
     float f1 = Float.parseFloat(n1);
     float f2 = Float.parseFloat(n2);
     float f3 = Float.parseFloat(n3);
@@ -155,74 +157,76 @@ public class rickController {
   }
 
   /*
-   * Crea un endpoint al que le pases un texto (frase).
-   * Este devolverá el mismo texto, pero con la primera letra
-   * de cada palabra en mayúsucula (el resto en minúscula)
-   * 
-   * 
-   * GET http://localhost:8080/capitalize/xxxx
-   */
+ Crea un endpoint al que le pases un texto (frase).
+Este devolverá el mismo texto, pero con la primera letra
+de cada palabra en mayúsucula (el resto en minúscula)
+
+
+ GET http://localhost:8080/capitalize/xxxx
+ */
   @GetMapping("/capitalize/{text}")
   public static String capitalize(@PathVariable String text) {
     return Utils.capitalizeText(text);
   }
-
   /*
-   * 
-   * - Crea un endpoint que devuelva 3 colores random sin repetir
-   * Parte de un array con los colores básicos
-   * [negro, azul, marrón, gris, verde, naranja, rosa, púrpura,
-   * rojo, blanco y amarillo]
-   */
-  @GetMapping("/randomColors")
-  public static String randomColors() {
-    final int COLOR_COUNT = 3;
-    final String[] COLORS = new String[] { "negro", "azul", "marrón", "gris", "verde", "naranja", "rosa", "púrpura",
-        "rojo", "blanco", "amarillo" };
-    if (COLOR_COUNT > COLORS.length)
-      throw new RuntimeException("Limite de colores superado");
 
+- Crea un endpoint que devuelva 3 colores random sin repetir
+Parte de un array con los colores básicos
+[negro, azul, marrón, gris, verde, naranja, rosa, púrpura, 
+rojo, blanco y amarillo]
+*/
+  @GetMapping("/randomColors")
+  public static String randomColors(){
+    final int COLOR_COUNT = 3;
+    final String[] COLORS = new String[] {"negro", "azul", "marrón", "gris", "verde", "naranja", "rosa", "púrpura", "rojo", "blanco", "amarillo"};
+    if(COLOR_COUNT > COLORS.length) throw new RuntimeException("Limite de colores superado");
+    
     ArrayList<String> colores = new ArrayList<String>(Arrays.asList(COLORS));
     String finalColors = "";
-    for (int i = 0; i < COLOR_COUNT; i++) {
+    for (int i=0;i<COLOR_COUNT;i++){
       int random = Utils.getRandomValue(colores.size());
-      finalColors += colores.remove(random) + " ";
+      finalColors += colores.remove( random ) + " ";
     }
     return finalColors;
   }
 
   /**
-   * Crea un endpoint que te devuelva un persona random
-   * de la serie rick and morty
-   * 
-   * // GET https://rickandmortyapi.com/api/character/???
-   * 
+   Crea un endpoint que te devuelva un persona random 
+   de la serie rick and morty
+
+   // GET https://rickandmortyapi.com/api/character/???
+   
    */
 
-  @GetMapping("/rickandmorty/random")
-  public String randomCharacter() {
-    // RickAndMortyService rickAndMortyService = new RickAndMortyService();
-    CharacterModel characterModel = rickAndMortyService2.getCharacterRandom();
 
-    return characterModel.name + "<br/>" + "<img width='200' src='" + characterModel.image + "'/>";
-  }
 
-  @GetMapping("/rickandmorty/all")
-  public String characters() {
+   @GetMapping("/rickandmorty/random")
+   public String randomCharacter(){
+      //RickAndMortyService rickAndMortyService = new RickAndMortyService();
+      CharacterModel characterModel = rickAndMortyService2.getCharacterRandom();
+
+      return characterModel.name +"<br/>"+ "<img width='200' src='"+characterModel.image+"'/>";
+   }
+
+   @GetMapping("/rickandmorty/all")
+   public String characters(){
     CharactersModel charactersModel = rickAndMortyService2.getAllCharacters();
     String html = "<html>";
-    html += "<head>";
-    html += "</head>";
-    html += "<body>";
-    for (CharacterModel characterModel : charactersModel.results) {
+    html+="<head>";
+    html+="</head>";
+    html +="<body>";
+    for(CharacterModel characterModel : charactersModel.results){
       html += characterModel.name;
       html += "<br/>";
-      html += "<img width='100px' src='" + characterModel.image + "'>";
+      html += "<img width='100px' src='"+characterModel.image+"'>";
       html += "<hr/>";
     }
-    html += "</body>";
-    html += "</html>";
+    html+="</body>";
+    html+="</html>";
     return html;
-  }
+   }
+
+   
+
 
 }
