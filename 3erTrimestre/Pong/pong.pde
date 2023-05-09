@@ -58,7 +58,6 @@ class Ball{
   public void draw() {
     square(x,y, w);
   }
-  
   public void reset()
   {
     x=width/2;
@@ -66,21 +65,11 @@ class Ball{
     
     vx=3;
     vy=3;
-    
-    
-    float M=0;
-    float N=360;
-    float anguloGrados = (float)(Math.random()*(N-M+1)+M);
-    double anguloRadianes = (anguloGrados * Math.PI)/180;
-    vx = (float)Math.cos(anguloRadianes) * 5;
-    vy = (float)Math.sin(anguloRadianes) * 5;
   }
-  
-  
-  public void updatePosition() {
 
-    x += vx;
-    y += vy;
+  public void updatePosition() {
+    x = x + vx;
+    y = y + vy;
   }
   private boolean hasCollionLeftWall() { 
     return x<0;
@@ -114,37 +103,28 @@ class Ball{
     return false;
   }
   
-  public void controlCollisionLeftRaquet(Raquet r) {
+  public void controlCollisionLeftRaquet(RaquetL r) {
     if(x <= r.x+r.w && x+w >r.x ){
       if(y+w > r.y  &&  y < r.y+r.h ){
         vx *= -1;
         x=r.x+r.w;
-        // incremento dificulta
-        vx = vx * 1.1;
-        vy = vy * 1.1; 
       }
     }
     
   }
-  public void controlCollisionRightRaquet(Raquet r) {
+  public void controlCollisionRightRaquet(RaquetR r) {
     if(x+w >= r.x && x < r.x+r.w){
       if(y+w > r.y  &&  y < r.y+r.h ){
         vx *= -1;
         x=r.x-w;
-         // incremento dificulta
-        vx = vx * 1.1;
-        vy = vy * 1.1; 
       }
     }
   }
 }
 
-private float previousMilli=millis();
 
 
-ArrayList<Ball> balls;
-
-
+Ball ball;
 RaquetL raquetL;
 RaquetR raquetR;
 
@@ -155,7 +135,7 @@ public void setup() {
   textSize(30);
   raquetL = new RaquetL();
   raquetR = new RaquetR();
-  balls = new ArrayList<Ball>();
+  ball = new Ball();
   
 }
 
@@ -163,7 +143,7 @@ public void draw(){
   background(0);
   raquetL.draw();
   raquetR.draw();
-  for(Ball ball : balls)  ball.draw();
+  ball.draw();
   
   rect(width/2,0, 3,height);
   text(raquetL.points, 40,40);
@@ -172,32 +152,24 @@ public void draw(){
   
   raquetL.updatePosition();
   raquetR.updatePosition();
-  for(Ball ball : balls)  ball.updatePosition();
+  ball.updatePosition();
   
   raquetL.limitOutScreen();
   raquetR.limitOutScreen();
   
-  for(Ball ball : balls)  ball.controlCollisionTopBottomWall();
+  ball.controlCollisionTopBottomWall();
   
-  for(Ball ball : balls)  {
-    if(ball.controlCollisionLeftWall()){
-      raquetR.points++;
-      //reset();
-      balls.remove(ball);
-      break;
-    }
-    if(ball.controlCollisionRightWall()){
-      raquetL.points++;
-      //reset();
-      balls.remove(ball);
-      break;
-    }
- 
-  
-    ball.controlCollisionLeftRaquet(raquetL);
-    ball.controlCollisionRightRaquet(raquetR);
-  
+  if(ball.controlCollisionLeftWall()){
+    raquetR.points++;
+    reset();
   }
+  if(ball.controlCollisionRightWall()){
+    raquetL.points++;
+    reset();
+  }
+  
+  ball.controlCollisionLeftRaquet(raquetL);
+  ball.controlCollisionRightRaquet(raquetR);
 }
 
 public void keyPressed(){
@@ -207,7 +179,6 @@ public void keyPressed(){
   if(keyCode == UP) raquetR.moveUp();
   if(keyCode == DOWN) raquetR.moveDown();
   
-  if(key == 'n') balls.add(new Ball());
   
   System.out.println(keyCode);
 }
@@ -218,6 +189,6 @@ public void keyReleased(){
 }
 public void reset(){
   
-  for(Ball ball : balls)  ball.reset();
+  ball.reset();
   
 }
