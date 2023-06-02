@@ -1,0 +1,18 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLHierarchy</id><coordinates><x>50</x><y>10</y><w>340</w><h>480</h></coordinates><panel_attributes>type=Package
+mani
+	java
+		com
+			cebem
+				rickandmorty
+
+					controllers
+					services
+					models
+					repositories
+					utils
+	resources
+		template
+		static
+test</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>60</x><y>580</y><w>100</w><h>70</h></coordinates><panel_attributes>Controllers</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>500</x><y>580</y><w>100</w><h>70</h></coordinates><panel_attributes>Repositores</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>280</x><y>580</y><w>100</w><h>70</h></coordinates><panel_attributes>Services</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>150</x><y>610</y><w>150</w><h>40</h></coordinates><panel_attributes>lt=.&gt;
+&lt;&lt;access&gt;&gt;</panel_attributes><additional_attributes>10;20;130;20</additional_attributes></element><element><id>Relation</id><coordinates><x>370</x><y>610</y><w>150</w><h>40</h></coordinates><panel_attributes>lt=.&gt;
+&lt;&lt;access&gt;&gt;</panel_attributes><additional_attributes>10;20;130;20</additional_attributes></element></diagram>

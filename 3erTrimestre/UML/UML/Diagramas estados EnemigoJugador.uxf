@@ -1,0 +1,30 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLState</id><coordinates><x>160</x><y>100</y><w>180</w><h>110</h></coordinates><panel_attributes>patrulla
+--
+entry: movimientos lentos
+exit:
+do: moverse random
+
+-.
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>540</x><y>100</y><w>180</w><h>110</h></coordinates><panel_attributes>persecucion
+--
+entry: movimientos rapidos
+exit:
+do:se dirige hacia el jugador
+
+-.
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>330</x><y>130</y><w>230</w><h>40</h></coordinates><panel_attributes>lt=-&gt;
+entra campo vision</panel_attributes><additional_attributes>10;20;210;20</additional_attributes></element><element><id>UMLState</id><coordinates><x>350</x><y>450</y><w>180</w><h>110</h></coordinates><panel_attributes>Ataque
+--
+entry: pararse
+exit:
+do: golpear
+
+-.
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>410</x><y>150</y><w>170</w><h>320</h></coordinates><panel_attributes>lt=-&gt;
+entra en rango</panel_attributes><additional_attributes>130;10;10;300</additional_attributes></element><element><id>Relation</id><coordinates><x>510</x><y>200</y><w>160</w><h>270</h></coordinates><panel_attributes>lt=-&gt;
+fuera de rango</panel_attributes><additional_attributes>10;250;100;10</additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>200</y><w>200</w><h>270</h></coordinates><panel_attributes>lt=-&gt;
+sale campo vision</panel_attributes><additional_attributes>160;250;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>330</x><y>160</y><w>230</w><h>40</h></coordinates><panel_attributes>lt=-&gt;
+sale campo vision</panel_attributes><additional_attributes>210;20;10;20</additional_attributes></element></diagram>
